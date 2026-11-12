@@ -38,12 +38,18 @@ fetch('data/cost.json')
   .then(data => {
     const byWh = data.by_warehouse || [];
     const totalCost = byWh.reduce((s, w) => s + w.total_cost_eur, 0);
+    const storageCost = byWh.reduce((sum, w) => sum + w.storage_cost_eur, 0);
+const storageShare = totalCost ? storageCost / totalCost * 100 : 0;
     const avgCostPerTonne = byWh.length ? (byWh.reduce((s, w) => s + w.cost_eur_per_tonne, 0) / byWh.length) : 0;
 
     document.getElementById('kpis').innerHTML = `
       <div class="kpi"><div class="value">${(totalCost / 1000).toFixed(0)}k EUR</div><div class="label">Total network cost / year</div></div>
       <div class="kpi"><div class="value">${avgCostPerTonne.toFixed(0)} EUR</div><div class="label">Avg cost per tonne (mean across warehouses)</div></div>
-    `;
+   <div class="kpi">
+  <div class="value">${storageShare.toFixed(1)}%</div>
+  <div class="label">Storage share of total network cost</div>
+</div>
+      `;
     document.getElementById('assumptions').innerHTML =
       `Assumptions (illustrative, not researched market rates): ${data.assumptions.cost_eur_per_tonne_km} EUR/tonne-km transport, ` +
       `${data.assumptions.storage_cost_eur_per_tonne_year} EUR/tonne/year storage.`;
