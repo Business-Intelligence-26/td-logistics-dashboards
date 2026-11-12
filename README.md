@@ -1,5 +1,8 @@
 # Student manual — Dashboard design: three roles, three KPIs, one logistics network
 
+> **[dashboard is live](https://business-intelligence-26.github.io/td-logistics-dashboards/)**
+
+
 **Create a file called `REFLECTIONS.md` in your repo now, before you start.** Every
 question in this document marked **Reflection** goes in it, numbered. The consolidated
 list is repeated at the end of this document so you can check you haven't missed one.
